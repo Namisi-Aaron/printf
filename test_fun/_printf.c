@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
 /**
  * _printf - produces output according to a format
  * @format: string input
@@ -8,36 +6,56 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, len, j;
-	char *str;
-	char ch;
-	va_list(args);
+	int print_chara = 0;
+	va_list myList_args;
 
-	va_start(args, format);
-	len = _strlen(format);
-	for (i = 0; i < len; i++)
+	if(format == NULL)
 	{
-		if (format[i] == '%')
+		return (-1);
+	}
+
+	va_start(myList_args, format);
+
+	while(*format)
+	{
+		if(*format != '%')
 		{
-			i++;
-			if (format[i] == '%')
-				_putchar('%');
-			else if (format[i] == 'c')
-			{
-				ch = va_arg(args, int);
-				_putchar(ch);
-			}
-			else if (format[i] == 's')
-			{
-				str = va_arg(args, char *);
-				for (j = 0; str[j] != '\0'; j++)
-					_putchar(str[j]);
-			}
+			write(1, format, 1);
+			print_chara++;
 		}
 		else
-			_putchar(format[i]);
+		{
+			format++;
+			if(*format == '\0')
+			{
+				break;
+			}
+			if(*format == '%')
+			{
+				write(1, format, 1);
+				print_chara++;
+			}
+			else if (*format == 's')
+			{
+				char *myString = va_arg(myList_args, char*);
+				int length_string = 0;
+				while(myString[length_string] != '\0')
+				{
+					length_string++;
+				
+				}
+				write(1,myString, length_string);
+				print_chara += length_string;
+			}
+			else if (*format == 'c')
+			{
+				char ch = va_arg(myList_args, int);
+				write(1, &ch, 1);
+				print_chara++;
+			}
+		}
+		format++;
 	}
-	va_end(args);
-
-	return (len);
+	va_end(myList_args);
+	return (print_chara);
 }
