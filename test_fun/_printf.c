@@ -8,17 +8,20 @@ int _printf(const char *format, ...)
 {
 	int print_chara = 0;
 	va_list myList_args;
+	int length_string = 0;
+	char ch;
+	char *myString;
 
-	if(format == NULL)
+	if (format == NULL)
 	{
 		return (-1);
 	}
 
 	va_start(myList_args, format);
 
-	while(*format)
+	while (*format)
 	{
-		if(*format != '%')
+		if (*format != '%')
 		{
 			write(1, format, 1);
 			print_chara++;
@@ -26,30 +29,28 @@ int _printf(const char *format, ...)
 		else
 		{
 			format++;
-			if(*format == '\0')
+			if (*format == '\0')
 			{
 				break;
 			}
-			if(*format == '%')
+			if (*format == '%')
 			{
 				write(1, format, 1);
 				print_chara++;
 			}
 			else if (*format == 's')
 			{
-				char *myString = va_arg(myList_args, char*);
-				int length_string = 0;
-				while(myString[length_string] != '\0')
+				myString = va_arg(myList_args, char*);
+				while (myString[length_string] != '\0')
 				{
 					length_string++;
-				
 				}
-				write(1,myString, length_string);
+				write(1, myString, length_string);
 				print_chara += length_string;
 			}
 			else if (*format == 'c')
 			{
-				char ch = va_arg(myList_args, int);
+				ch = va_arg(myList_args, int);
 				write(1, &ch, 1);
 				print_chara++;
 			}
