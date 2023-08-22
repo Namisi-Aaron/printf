@@ -1,14 +1,13 @@
 #include "main.h"
-#include "stdio.h"
 /**
- * main - tests the function
+ * main - tests code
+ *
  * Return: 1 on success
  */
 int main(void)
 {
-	_printf("Character:[%c]\n", 'H');
-	_printf("Percent:[%%]\n");
-	_printf("String:[%s]\n", "I am a string !");
-
-	return (1);
+	    _printf("Character:[%c]\n", 'H');
+	    _printf("String:[%s]\n", "I am a string !");
+	    _printf("Percent:[%%]\n");
+	    return (1);
 }
