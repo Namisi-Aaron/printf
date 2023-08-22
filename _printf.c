@@ -7,7 +7,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int print_chara;
+	int print_chara, integer;
 	va_list myList_args;
 	int length_string;
 	char ch;
@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				myString = va_arg(myList_args, char*);
+				myString = va_arg(myList_args, char *);
 				while (myString[length_string] != '\0')
 				{
 					length_string++;
@@ -56,6 +56,11 @@ int _printf(const char *format, ...)
 				ch = va_arg(myList_args, int);
 				write(1, &ch, 1);
 				print_chara++;
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				integer = va_arg(myList_args, int);
+				print_chara += print_int(integer);
 			}
 		}
 		format++;
