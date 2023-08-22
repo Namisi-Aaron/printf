@@ -6,12 +6,14 @@
  */
 int _printf(const char *format, ...)
 {
-	int print_chara = 0;
+	int print_chara;
 	va_list myList_args;
-	int length_string = 0;
+	int length_string;
 	char ch;
 	char *myString;
 
+	print_chara = 0;
+	length_string = 0;
 	if (format == NULL)
 	{
 		return (-1);
